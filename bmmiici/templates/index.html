@@ -24,7 +24,11 @@
 	<form action="/doctor_signup/" method="post">
     	{% csrf_token %}
     	{{doctor_form}}
-    	Title : <input id="title" type="text" name="title" maxlength="10" required /> <br/>
+    	Title : <select id="title" type="select" name="title" maxlength="10" required > 
+    		<option>Dr.</option>
+    		<option>Dr Prof.</option>
+    	</select>
+    	<br/>
     	firstName: <input id="firstName" type="text" name="firstName" maxlength="55" required /> <br/>
     	lastName: <input id="lastName" type="text" name="lastName" maxlength="55" required /> <br/>
     	addrLine1: <input id="addrLine1" type="text" name="addrLine1" maxlength="100" required /> <br/>
@@ -34,6 +38,8 @@
     	mobile: <input id="mobile" type="text" name="mobile" maxlength="100" required /> <br/>
     	email: <input id="email" type="text" name="email" maxlength="120" required /> <br/>
     	website: <input id="website" type="text" name="website"  required /> <br/>
+    	 <select  class="form-control specialization" multiple="multiple" id="specialization" name="specialization" >
+							      </select>
     	<input type="submit" value="Submit" />
 	</form>
   </center>

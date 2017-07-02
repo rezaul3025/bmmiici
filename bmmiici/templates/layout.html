@@ -14,7 +14,7 @@
     <!--link href="{% static "bootstrap/css/bootstrap-theme.min.css" %}" rel="stylesheet" /-->
 
 	<!--Select2 CSS -->
-    <!--link href="{% static "select2-4.0.2/dist/css/select2.min.css" %}" rel="stylesheet" /-->
+    <link href="{% static "select2-4.0.2/dist/css/select2.min.css" %}" rel="stylesheet" /> 
 	
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -202,8 +202,8 @@
     <script src="{% static "angularjs/angular.min.js" %}"></script>
     <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
     <script src="{% static "bootstrap/js/ui-bootstrap-tpls-1.3.0.min.js" %}"></script>
-    <!--script src="{% static "select2-4.0.2/dist/js/select2.full.min.js" %}"></script-->
-    <script src="{% static "select2/select2.min.js" %}"></script>
+    <script src="{% static "select2-4.0.2/dist/js/select2.full.min.js" %}"></script> 
+    <!-- <script src="{% static "select2/select2.min.js" %}"></script> -->
     <script src="{% static "custom/js/service/service.js" %}"></script> 
     <script src="{% static "custom/js/component/component.js" %}"></script>
     <script src="{% static "custom/js/jobsphereonlineController.js" %}"></script>
@@ -214,5 +214,91 @@
 		
 	});
     </script>
+    <script type="text/javascript">
+		var data = [{ id: 'Accident and emergency medicine', text: 'Accident and emergency medicine' }, { id: 'Allergology', text: 'Allergology' }, 
+					{ id: 'Anaesthetics', text: 'Anaesthetics' }, { id: 'Biological hematology', text: 'Biological hematology' }, { id: 'Cardiology', text: 'Cardiology' },
+					{ id: 'Child psychiatry', text: 'Child psychiatry'}, { id: 'Clinical biology', text: 'Clinical biology' }, { id: 'Clinical chemistry', text: 'Clinical chemistry' },
+					{ id: 'Clinical neurophysiology', text: 'Clinical neurophysiology'}, { id: 'Craniofacial surgery', text: 'Craniofacial surgery' }, { id: 'Dental, oral and maxillo-facial surgery', text: 'Dental, oral and maxillo-facial surgery' },
+					{ id: 'Dermato-venerology', text: 'Dermato-venerology'}, { id: 'Dermatology', text: 'Dermatology' }, { id:  'Endocrinology', text: 'Endocrinology' },
+					{ id: 'Gastro-enterologic surgery', text: 'Gastro-enterologic surgery'}, { id: 'Gastroenterology', text: 'Gastroenterology' }, { id: 'General hematology', text: 'General hematology' },
+					{id: 'General Practice', text: 'General Practice'}, { id: 'General surgery', text: 'General surgery' }, { id: 'Geriatrics', text: 'Geriatrics' },
+					{id: 'Immunology', text: 'Immunology'}, { id: 'Infectious diseases', text: 'Infectious diseases' }, { id: 'Internal medicine', text: 'Internal medicine' }];
+
+		/*$(".specialization").select2({
+		  ajax: {
+		    url: "/specializations",
+		    dataType: 'json',
+		    delay: 250,
+		    data: function (params) {
+		      return {
+		        queryStr: params.term, // search term
+		        page: params.page
+		      };
+		    },
+		    processResults: function (data, params) {
+		      // parse the results into the format expected by Select2
+		      // since we are using custom formatting functions we do not need to
+		      // alter the remote JSON data, except to indicate that infinite
+		      // scrolling can be used
+		      alert(data.length)
+		      params.page = params.page || 1;
+
+		      return {
+		        results: data,
+		        pagination: {
+		          more: (params.page * 30) < 10
+		        }
+		      };
+		    },
+		    cache: true
+		  },
+		  escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+		  minimumInputLength: 1,
+		  templateResult: '', // omitted for brevity, see the source of this page
+		 templateSelection: '' // omitted for brevity, see the source of this page
+		}); */
+
+		$('.specialization').select2({
+		    ajax: {
+		        url: "/specializations",
+		        dataType: 'json',
+		        quietMillis: 100,
+		        data: function (params) {
+		           return {
+				        queryStr: typeof params.term != 'undefined' ? params.term:'', // search term
+				        page: params.page
+				      };
+		        },
+		        processResults: function (data,  params) {
+		          var results = [];
+		          $.each(data, function(index, item){
+		            results.push({
+		              id: item,
+		              text: item
+		            });
+		          });
+		          params.page = params.page || 1;
+		
+		          return {
+		              results: results,
+				        pagination: {
+				          more: (params.page * 30) < data.length
+				        }
+		          };
+		        }
+		    }
+		}).on('select2:unselecting', function(e) {
+            $(this).on('select2:opening', function(e) {
+                e.preventDefault();
+            });
+
+        }).on('select2:unselect', function(e) {
+            var sel = $(this);
+            setTimeout(function() {
+              sel.off('select2:opening');
+            }, 1);
+       });
+
+	</script>
   </body>
 </html>

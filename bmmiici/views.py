@@ -16,6 +16,7 @@ from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from  bmmiici.forms import DoctorForm
+from  bmmiici.models import Specialization
 
 def index(request):
     #conn = getConnection()
@@ -41,3 +42,13 @@ def doctor_signup(request):
         doctor_form = DoctorForm()
 
     return render(request, 'index.html', {'doctor_form': doctor_form})
+
+
+@require_http_methods(["GET"])
+def getAllSpecializations(request):
+    queryStr = request.GET['queryStr']
+    allSpecializationsOb = Specialization.objects.filter(Q(name__icontains=queryStr))
+    allSpecializations = []
+    for sp in allSpecializationsOb:
+        allSpecializations.append(sp.name)
+    return HttpResponse(json.dumps(allSpecializations), content_type="application/json")
