@@ -19,4 +19,9 @@ if __name__ == "__main__":
                 "forget to activate a virtual environment?"
             )
         raise
+    
+    import pymysql
+
+    pymysql.install_as_MySQLdb()
+    
     execute_from_command_line(sys.argv)
