@@ -20,5 +20,21 @@
 		<input type="hidden" name="page" value="1" />
 		<button type="submit" class="btn btn-primary">Search</button>
 	</form>
+	
+	<form action="/doctor_signup/" method="post">
+    	{% csrf_token %}
+    	{{doctor_form}}
+    	Title : <input id="title" type="text" name="title" maxlength="10" required /> <br/>
+    	firstName: <input id="firstName" type="text" name="firstName" maxlength="55" required /> <br/>
+    	lastName: <input id="lastName" type="text" name="lastName" maxlength="55" required /> <br/>
+    	addrLine1: <input id="addrLine1" type="text" name="addrLine1" maxlength="100" required /> <br/>
+    	addrLine2: <input id="addrLine2" type="text" name="addrLine2" maxlength="100" required /> <br/>
+    	postCode: <input id="postCode" type="text" name="postCode" maxlength="20" required /> <br/>
+    	city: <input id="city" type="text" name="city" maxlength="100" required /> <br/>
+    	mobile: <input id="mobile" type="text" name="mobile" maxlength="100" required /> <br/>
+    	email: <input id="email" type="text" name="email" maxlength="120" required /> <br/>
+    	website: <input id="website" type="text" name="website"  required /> <br/>
+    	<input type="submit" value="Submit" />
+	</form>
   </center>
  {% endblock %}
