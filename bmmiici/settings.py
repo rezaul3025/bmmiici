@@ -85,6 +85,21 @@ if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
             'USER': 'root',
         }
     }
+elif os.getenv('ENV') == 'dev':
+    DATABASES = {
+        'default': {
+           # 'ENGINE': 'django.db.backends.sqlite3',
+           # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+           'NAME':'bmmiici',
+           'ENGINE': 'django.db.backends.mysql',
+           'HOST': 'localhost',
+           'USER': 'root',
+           'PASSWORD': 'root' ,
+           'OPTIONS': {
+              'autocommit': True,
+            },
+        }
+    }
 else:
     DATABASES = {
         'default': {
