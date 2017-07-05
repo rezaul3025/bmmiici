@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 {% block content %}
-  <center ng-controller="jobsphereonlineController">
+  <center ng-controller="HealthcareWebController">
 	<form class="form-inline" name="searchForm" action="job/search/">
 		<div class="form-group">
 			<label for="jobCategory">What ?</label>
@@ -23,7 +23,7 @@
 	
 	<form action="/doctor_signup/" method="post">
     	{% csrf_token %}
-    	{{doctor_form}}
+    	
     	Title : <select id="title" type="select" name="title" maxlength="10" required > 
     		<option>Dr.</option>
     		<option>Dr Prof.</option>
@@ -38,9 +38,39 @@
     	mobile: <input id="mobile" type="text" name="mobile" maxlength="100" required /> <br/>
     	email: <input id="email" type="text" name="email" maxlength="120" required /> <br/>
     	website: <input id="website" type="text" name="website"  required /> <br/>
-    	 <select  class="form-control specialization" multiple="multiple" id="specialization" name="specialization" >
+    	 <select  class="form-control specialization" multiple="multiple"  ng-model="specialization" ng-change="setSpecialization(specialization)" >
 							      </select>
+		 <input type="hidden" id="specializations" name="specializations" />					      
     	<input type="submit" value="Submit" />
+    	
+    	
 	</form>
+	
+	<hr/>
+    	Patient <br/>
+    	<form action="/add_patient/" method="post">
+    	{% csrf_token %}
+    	
+    	Title : <select id="title" type="select" name="title" maxlength="10" required > 
+    		<option>Mr</option>
+    		<option>Mrs</option>
+    		<option>Ms</option>
+    	</select>
+    	<br/>
+    	firstName: <input id="firstName" type="text" name="firstName" maxlength="55" required /> <br/>
+    	lastName: <input id="lastName" type="text" name="lastName" maxlength="55" required /> <br/>
+    	addrLine1: <input id="addrLine1" type="text" name="addrLine1" maxlength="100" required /> <br/>
+    	addrLine2: <input id="addrLine2" type="text" name="addrLine2" maxlength="100" required /> <br/>
+    	postCode: <input id="postCode" type="text" name="postCode" maxlength="20" required /> <br/>
+    	city: <input id="city" type="text" name="city" maxlength="100" required /> <br/>
+    	mobile: <input id="mobile" type="text" name="mobile" maxlength="100" required /> <br/>
+    	email: <input id="email" type="text" name="email" maxlength="120" required /> <br/>
+    	dob: <input id="dob" type="date" name="dob" maxlength="120" required /> <br/>
+    			      
+    	<input type="submit" value="Submit" />
+    	
+    	
+	</form>
+      	
   </center>
  {% endblock %}

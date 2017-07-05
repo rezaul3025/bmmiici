@@ -94,4 +94,9 @@ module.controller('HealthcareWebController', ['$http', '$scope', '$window',  fun
 	  
 	  //$scope.ratingPointchnage(true,search.ratingPoints, search);
   }
+  
+  $scope.setSpecialization = function(specialization){
+	  $("#specializations").val(specialization);
+  }
+  
 }])
