@@ -28,14 +28,14 @@ def doctor_signup(request):
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         doctor_form = DoctorForm(request.POST)
-        print doctor_form
+        print (doctor_form)
         # check whether it's valid:
         if doctor_form.is_valid():
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
             doctor_form.save()
-            print 'form saved'
+            print ('form saved')
             return HttpResponseRedirect('/')
 
     # if a GET (or any other method) we'll create a blank form
@@ -49,14 +49,14 @@ def add_patient(request):
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         patient_form = PatientForm(request.POST)
-        print patient_form
+        print(patient_form)
         # check whether it's valid:
         if patient_form.is_valid():
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
             patient_form.save()
-            print 'form saved'
+            print ('form saved')
             return HttpResponseRedirect('/')
 
     # if a GET (or any other method) we'll create a blank form

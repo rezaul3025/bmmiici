@@ -17,11 +17,12 @@ from django.conf.urls import url
 from django.contrib import admin
 
 from . import views 
+from bmmiici.admin import admin_site
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^doctor_signup/', views.doctor_signup, name='doctor_signup'),
     url(r'^add_patient/', views.add_patient, name='add_patient'),
-    url(r'^admin/', admin.site.urls),
+    url(r'^myadmin/', admin_site.urls),
     url(r'^specializations/', views.getAllSpecializations, name='getAllSpecializations'),
 ]
