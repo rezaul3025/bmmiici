@@ -1,10 +1,15 @@
 from django.forms import ModelForm
+from django.forms.widgets import Select
 from bmmiici.models import Doctor, Specialization, DoctorSpecialization, Patient
 
 class DoctorForm(ModelForm):
     class Meta:
+        CHOICES = Specialization.objects.all()
         model = Doctor
         fields = '__all__'
+        widgets = {
+            'specializations': Select(choices=( (x.id, x.name) for x in CHOICES )),
+        }
 
 class SpecializationForm(ModelForm):
     class Meta:
